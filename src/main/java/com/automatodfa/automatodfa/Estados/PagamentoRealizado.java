@@ -1,51 +1,50 @@
-package com.automatodfa.automatodfa.services;
+package com.automatodfa.automatodfa.Estados;
 
-import com.automatodfa.automatodfa.domain.Pedido;
+import com.automatodfa.automatodfa.pedido.Pedido;
 import com.automatodfa.automatodfa.transicoes.Transicoes;
 
-public class Pendente implements Transicoes {
+public class PagamentoRealizado implements Transicoes {
 
-    @Override
-    public Pedido realizarPedido(Pedido pedido) {
+
+    public void realizarPedido(Pedido pedido) {
         pedido.setTransicoes(new PedidoNovo());
         System.out.println("Pedido Novo iniciado");
-        return null;
     }
 
-    @Override
+
     public void realizarPagamento(Pedido pedido) {
-        pedido.setTransicoes(new PagamentoRealizado());
-        System.out.println("Pagamento realizado");
+        System.out.println("ERRO: Pagamento já realizado");
     }
 
-    @Override
+
     public void aprovar(Pedido pedido) {
-        System.out.println("ERRO: Pagamento não realizado ainda");
+        pedido.setTransicoes(new Aprovado());
+        System.out.println("Pedido aprovado");
     }
 
-    @Override
+
     public void transportar(Pedido pedido) {
         System.out.println("ERRO: Pedido ainda não aprovado");
     }
 
-    @Override
+
     public void entregar(Pedido pedido) {
         System.out.println("ERRO: Pedido não saiu para entrega ainda");
     }
 
-    @Override
+
     public void finalizar(Pedido pedido) {
-        System.out.println("ERRO: Pedido não entrege ainda");
+        System.out.println("ERRO: Pedido ainda não entregue");
     }
 
-    @Override
+
     public void pender(Pedido pedido) {
-        System.out.println("ERRO: Pedido já pendente");
+        System.out.println("ERRO: Não é possível deixar o pedido pendente");
     }
 
-    @Override
+
     public void cancelar(Pedido pedido) {
         pedido.setTransicoes(new Cancelado());
-        System.out.println("Pedido cancelado com sucesso");
+        System.out.println("Pedido cancelado");
     }
 }

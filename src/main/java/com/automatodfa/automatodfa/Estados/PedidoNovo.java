@@ -1,24 +1,18 @@
-package com.automatodfa.automatodfa.services;
+package com.automatodfa.automatodfa.Estados;
 
-import com.automatodfa.automatodfa.domain.Pedido;
+import com.automatodfa.automatodfa.pedido.Pedido;
 import com.automatodfa.automatodfa.transicoes.Transicoes;
-import lombok.Data;
 
-@Data
 public class PedidoNovo implements Transicoes {
 
-    private String printEstado;
-
-    public Pedido realizarPedido(Pedido pedido) {
+    public void realizarPedido(Pedido pedido) {
         pedido.setTransicoes(new PedidoNovo());
-        setPrintEstado("Pedido iniciado com sucesso");
         System.out.println("Pedido Novo iniciado");
-        return pedido;
     }
 
     public void pender(Pedido pedido) {
-        System.out.println("Pedido pendente");
         pedido.setTransicoes(new Pendente());
+        System.out.println("Pedido pendente");
     }
 
     public void realizarPagamento(Pedido pedido) {
@@ -43,12 +37,5 @@ public class PedidoNovo implements Transicoes {
 
     public void cancelar(Pedido pedido) {
         System.out.println("ERRO: Não é possivel cancelar um pedido sem antes ficar pendente");
-    }
-
-    @Override
-    public String toString() {
-        return "PedidoNovo{" +
-                "printEstado='" + printEstado + '\'' +
-                '}';
     }
 }

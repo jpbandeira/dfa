@@ -1,18 +1,17 @@
-package com.automatodfa.automatodfa.domain;
+package com.automatodfa.automatodfa.pedido;
 
-import com.automatodfa.automatodfa.services.Cancelado;
-import com.automatodfa.automatodfa.services.Finalizado;
-import com.automatodfa.automatodfa.services.PedidoNovo;
+import com.automatodfa.automatodfa.Estados.PedidoNovo;
 import com.automatodfa.automatodfa.transicoes.Transicoes;
-import lombok.Data;
 
-@Data
+
 public class Pedido {
 
     private Transicoes transicoes = new PedidoNovo();
+    //private boolean estadoFinal;
 
     public void realizarPedido(){
         transicoes.realizarPedido(this);
+        //setEstadoFinal(false);
     }
 
     public void pender(){
@@ -37,10 +36,20 @@ public class Pedido {
 
     public void finalizar(){
         transicoes.finalizar(this);
+        //setEstadoFinal(true);
     }
 
     public void cancelar(){
         transicoes.cancelar(this);
+        //setEstadoFinal(true);
+    }
+
+    public Transicoes getTransicoes() {
+        return transicoes;
+    }
+
+    public void setTransicoes(Transicoes transicoes) {
+        this.transicoes = transicoes;
     }
 
 }

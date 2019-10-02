@@ -1,9 +1,9 @@
 package com.automatodfa.automatodfa.transicoes;
 
-import com.automatodfa.automatodfa.domain.Pedido;
+import com.automatodfa.automatodfa.pedido.Pedido;
 
 public interface Transicoes {
-    Pedido realizarPedido(Pedido pedido);
+    void realizarPedido(Pedido pedido);
     void realizarPagamento(Pedido pedido);
     void aprovar(Pedido pedido);
     void transportar(Pedido pedido);
